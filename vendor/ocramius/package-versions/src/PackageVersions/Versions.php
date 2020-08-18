@@ -44,7 +44,7 @@ final class Versions
   'symfony/polyfill-php80' => 'v1.18.1@d87d5766cbf48d72388a9f6b85f280c8ad51f981',
   'symfony/service-contracts' => 'v2.1.3@58c7475e5457c5492c26cc740cc0ad7464be9442',
   'symfony/string' => 'v5.1.3@f629ba9b611c76224feb21fe2bcbf0b6f992300b',
-  'andrius/pilvelis' => 'dev-master@7939276515485704d428b5a2997c8c4253cb4ba4',
+  'andrius/pilvelis' => 'dev-master@5a18de14fb3b089871511eb546d5536efd4fde1f',
 );
 
     private function __construct()

@@ -42,26 +42,25 @@ $employees_headers = $entityManager->getClassMetadata('Employees')->getColumnNam
                     </tr>";
             }
             ?>
-                <?php
-                if (isset($_GET["employees"])) {
-                    ob_clean(); ?>
-            <tr>
-                <?php
-                foreach ($employees_headers as $th) {
-                echo "<th>$th</th>";
-                }
-                ?>
-            </tr>
             <?php
-                    foreach ($employees as $values) {
-                        echo "<tr>
+            if (isset($_GET["employees"])) {
+                ob_clean(); ?>
+                <tr>
+                    <?php
+                    foreach ($employees_headers as $th) {
+                        echo "<th>$th</th>";
+                    }
+                    ?>
+                </tr>
+            <?php
+                foreach ($employees as $values) {
+                    echo "<tr>
                         <td>" . $values->getId() . "</td>
                         <td>" . $values->getName() . "</td>
                         <td>" . $values->getProjectId() . "</td>
                     </tr>";
-                    }
-
                 }
+            }
             ?>
         </table>
 

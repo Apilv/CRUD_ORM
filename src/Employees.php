@@ -19,12 +19,10 @@ class Employees
      */
     protected $name;
 
-    /**
-     * @ORM\Column(type="integer")
+    /** 
+     * @ORM\Column(type="integer") 
      */
     private $project_id;
-
-
 
     public function getId()
     {
@@ -46,13 +44,12 @@ class Employees
         return $this->project_id;
     }
 
-    public function setProjectId($prj_id)
+    public function setProjectId($project_id)
     {
-        $this->project_id = $prj_id;
+        $this->project_id = $project_id;
     }
 
-    public function __construct(){
-
+    public function __construct()
+    {
     }
 }
-

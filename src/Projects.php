@@ -2,6 +2,8 @@
 
 use Doctrine\ORM\Mapping as ORM;
 
+
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="projects")
@@ -23,7 +25,6 @@ class Projects
      * @ORM\Column(type="string")
      */
     private $deadline;
-
 
 
     public function getId()
