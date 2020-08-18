@@ -20,7 +20,7 @@ class Projects
     protected $name;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string")
      */
     private $deadline;
 
