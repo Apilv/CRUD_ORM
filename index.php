@@ -6,6 +6,22 @@ $employees = $entityManager->getRepository('Employees')->findAll();
 
 $projects_headers = $entityManager->getClassMetadata('Projects')->getColumnNames();
 $employees_headers = $entityManager->getClassMetadata('Employees')->getColumnNames();
+
+
+
+function teamMembers($query){
+    if(empty($query)){
+        return "-";
+    }
+    $squad = "";
+    foreach ($query as $name) {
+        foreach ($name as $value) {
+            $squad .= "$value, ";
+        }
+    }       
+    return substr($squad, 0,-2);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -29,16 +45,26 @@ $employees_headers = $entityManager->getClassMetadata('Employees')->getColumnNam
             <?php ob_start(); ?>
             <tr>
                 <?php
+                $column_count = 0;
                 foreach ($projects_headers as $th) {
+                    $column_count++;
                     echo "<th>$th</th>";
+                    if ($column_count === 3) {
+                        echo "<th>Team</th>";
+                    } else {
+                        continue;
+                    }
                 } ?>
             </tr>
             <?php
             foreach ($projects as $values) {
+                $id = $values->getid();
+                $query = $entityManager->createQuery("SELECT u.name FROM Employees u WHERE u.project_id = $id GROUP BY u.id")->getResult();
                 echo "<tr>
                         <td>" . $values->getId() . "</td>
                         <td>" . $values->getName() . "</td>
                         <td>" . $values->getDeadline() . "</td>
+                        <td>" . teamMembers($query) . "</td>
                     </tr>";
             }
             ?>
@@ -57,6 +83,7 @@ $employees_headers = $entityManager->getClassMetadata('Employees')->getColumnNam
                     echo "<tr>
                         <td>" . $values->getId() . "</td>
                         <td>" . $values->getName() . "</td>
+                        <td>" . $values->getProject() . "</td>
                         <td>" . $values->getProjectId() . "</td>
                     </tr>";
                 }

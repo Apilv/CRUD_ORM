@@ -4,6 +4,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="projects")
@@ -24,7 +25,7 @@ class Projects
     /**
      * @ORM\Column(type="string")
      */
-    private $deadline;
+    protected $deadline;
 
 
     public function getId()
@@ -52,7 +53,4 @@ class Projects
         $this->deadline = $deadline;
     }
 
-    public function __construct()
-    {
-    }
 }
