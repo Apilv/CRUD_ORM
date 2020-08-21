@@ -20,11 +20,6 @@ class Employees
     protected $name;
 
     /** 
-     * @ORM\Column(type="string") 
-     */
-    protected $project;
-
-    /** 
      * @ORM\Column(type="integer") 
      */
     private $project_id;
@@ -42,10 +37,6 @@ class Employees
     public function setName($name)
     {
         $this->name = $name;
-    }
-
-    public function getProject(){
-        return $this->project;
     }
 
     public function getProjectId()

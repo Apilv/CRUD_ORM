@@ -1,5 +1,7 @@
 <?php
 require "bootstrap.php";
+require "update_logic/delete_row.php";
+require "update_logic/add_row.php";
 
 $projects = $entityManager->getRepository('Projects')->findAll();
 $employees = $entityManager->getRepository('Employees')->findAll();
@@ -9,8 +11,10 @@ $employees_headers = $entityManager->getClassMetadata('Employees')->getColumnNam
 
 
 
-function teamMembers($query){
-    if(empty($query)){
+function teamMembers($query)
+{
+    
+    if (empty($query)) {
         return "-";
     }
     $squad = "";
@@ -18,8 +22,8 @@ function teamMembers($query){
         foreach ($name as $value) {
             $squad .= "$value, ";
         }
-    }       
-    return substr($squad, 0,-2);
+    }
+    return substr($squad, 0, -2);
 }
 
 ?>
@@ -63,13 +67,17 @@ function teamMembers($query){
                 echo "<tr>
                         <td>" . $values->getId() . "</td>
                         <td>" . $values->getName() . "</td>
-                        <td>" . $values->getDeadline() . "</td>
                         <td>" . teamMembers($query) . "</td>
+                        <td>" . $values->getDeadline() . "</td>
+                        <td><a href=\"index.php?editProject=$id\">Edit</a>
+                        <td><a href=\"index.php?addProject=$projects\">Add</a>
+                        <a href=\"index.php?deleteProjects=$id\">Delete</a></td>
                     </tr>";
             }
             ?>
             <?php
-            if (isset($_GET["employees"])) {
+            if ((isset($_GET["employees"]) || isset($_GET["editEmployee"]))                           || 
+                (isset($_GET["deleteEmployees"])|| isset($_GET["addEmployee"]))) {
                 ob_clean(); ?>
                 <tr>
                     <?php
@@ -80,17 +88,20 @@ function teamMembers($query){
                 </tr>
             <?php
                 foreach ($employees as $values) {
+                    $employeeId = $values->getid();
                     echo "<tr>
                         <td>" . $values->getId() . "</td>
                         <td>" . $values->getName() . "</td>
-                        <td>" . $values->getProject() . "</td>
                         <td>" . $values->getProjectId() . "</td>
+                        <td> <a href=\"index.php?editEmployee=$employeeId\">Edit</a>
+                        <td><a href=\"index.php?addEmployee=$employees\">Add</a>
+                        <a href=\"index.php?deleteEmployees=$employeeId\">Delete</a></td>
                     </tr>";
                 }
             }
             ?>
         </table>
-
+        <?= addRow($employees);?>
     </main>
 </body>
 

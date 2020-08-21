@@ -15,8 +15,10 @@ class Projects
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
+     * @ORM\JoinColumn(name="id", referencedColumnName="project_id", onDelete="CASCADE")
      */
     protected $id;
+
     /** 
      * @ORM\Column(type="string") 
      */
