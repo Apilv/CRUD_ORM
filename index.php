@@ -10,6 +10,17 @@ $projects_headers = $entityManager->getClassMetadata('Projects')->getColumnNames
 $employees_headers = $entityManager->getClassMetadata('Employees')->getColumnNames();
 
 
+ //------------HELPER FUNCTIONS-------------
+        $max_employee_id = max($employees)->getId();
+        
+        
+
+        $max_Project_id = max($projects)->getId();
+        $min_Project_id = min($projects)->getId();
+
+
+
+
 
 function teamMembers($query)
 {
@@ -54,7 +65,8 @@ function teamMembers($query)
                     $column_count++;
                     echo "<th>$th</th>";
                     if ($column_count === 3) {
-                        echo "<th>Team</th>";
+                        echo "<th>Team</th>
+                                <th>Update</th>";
                     } else {
                         continue;
                     }
@@ -67,10 +79,10 @@ function teamMembers($query)
                 echo "<tr>
                         <td>" . $values->getId() . "</td>
                         <td>" . $values->getName() . "</td>
-                        <td>" . teamMembers($query) . "</td>
                         <td>" . $values->getDeadline() . "</td>
+                        <td>" . teamMembers($query) . "</td>
                         <td><a href=\"index.php?editProject=$id\">Edit</a>
-                        <td><a href=\"index.php?addProject=$projects\">Add</a>
+                        <a href=\"index.php?addProject=$projects\">Add</a>
                         <a href=\"index.php?deleteProjects=$id\">Delete</a></td>
                     </tr>";
             }
@@ -101,7 +113,8 @@ function teamMembers($query)
             }
             ?>
         </table>
-        <?= addRow($employees);?>
+        <?= addNewEmployee();
+            addNewProject();?>
     </main>
 </body>
 
