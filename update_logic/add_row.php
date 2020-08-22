@@ -7,12 +7,12 @@ function addNewEmployee()
   if (isset($_GET["addEmployee"])) {
     echo
       '<form action="index.php?employees" method="post">
-      Employee Name<br>
-      <input type="text" name="employeeName" required><br>
-      Project ID<br>
-      <input type="number" name="projectId" min="' . $min_Project_id . '" max="' . $max_Project_id . '"><br>
-      <input type="submit" name="addNewEmployee" value="Add"><br>
-    </form>';
+          Employee Name<br>
+          <input type="text" name="employeeName" required><br>
+          Project ID<br>
+          <input type="number" name="projectId" min="' . $min_Project_id . '" max="' . $max_Project_id . '"><br>
+          <input type="submit" name="addNewEmployee" value="Add"><br>
+      </form>';
   }
 }
 
@@ -35,12 +35,12 @@ function addNewProject()
   if (isset($_GET["addProject"])) {
     echo
       '<form action="index.php?projects" method="post">
-      Project Name<br>
-      <input type="text" name="projectName" required><br>
-      Deadline<br>
-      <input type="date" name="projectDeadline" min="' . date("Y-m-d") . '" required><br>
-      <input type="submit" name="addNewProject" value="Add"><br>
-    </form>';
+          Project Name<br>
+          <input type="text" name="projectName" required><br>
+          Deadline<br>
+          <input type="date" name="projectDeadline" min="' . date("Y-m-d") . '" required><br>
+          <input type="submit" name="addNewProject" value="Add"><br>
+      </form>';
   }
 }
 

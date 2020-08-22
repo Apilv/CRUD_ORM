@@ -124,7 +124,8 @@ function teamMembers($query)
         <?= addNewEmployee();
         addNewProject();
         editEmployee();
-        editProject(); ?>
+        editProject();
+?>
     </main>
 </body>
 
