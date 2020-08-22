@@ -1,20 +1,20 @@
 <?php
 
-function addNewEmployee(){
+function addNewEmployee()
+{
   if (isset($_GET["addEmployee"])) {
-global $max_employee_id, $min_Project_id, $max_Project_id;
+    global $max_employee_id, $min_Project_id, $max_Project_id;
     $max_employee_id++;
-echo
+    echo
       '<form action="index.php?employees" method="post">
       Employee id<br>
       <input type="number" value="' . $max_employee_id . '" name="employeeId" readonly><br>
       Employee Name<br>
       <input type="text" name="employeeName" required><br>
       Project ID<br>
-      <input type="number" name="projectId" min="' . $min_Project_id . '" max="' . $max_Project_id .'"><br>
+      <input type="number" name="projectId" min="' . $min_Project_id . '" max="' . $max_Project_id . '"><br>
       <input type="submit" name="addNewEmployee" value="Add"><br>
     </form>';
-
   }
 }
 
@@ -22,7 +22,7 @@ echo
 function addNewProject()
 {
   if (isset($_GET["addProject"])) {
-    global $min_Project_id, $max_Project_id;
+    global  $max_Project_id;
     $max_Project_id++;
     echo
       '<form action="index.php?projects" method="post">
