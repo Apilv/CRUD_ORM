@@ -1,8 +1,8 @@
 <?php
 if(isset($_GET["deleteEmployees"])){
     $id = $_GET["deleteEmployees"];
-        $projects = $entityManager->find("Employees", $id);
-        $entityManager->remove($employees);
+        $employee = $entityManager->find("Employees", $id);
+        $entityManager->remove($employee);
         $entityManager->flush();
         header('Location: index.php?employees');
 } elseif

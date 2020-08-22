@@ -2,13 +2,11 @@
 
 function addNewEmployee()
 {
+  global $min_Project_id, $max_Project_id;
+
   if (isset($_GET["addEmployee"])) {
-    global $max_employee_id, $min_Project_id, $max_Project_id;
-    $max_employee_id++;
     echo
       '<form action="index.php?employees" method="post">
-      Employee id<br>
-      <input type="number" value="' . $max_employee_id . '" name="employeeId" readonly><br>
       Employee Name<br>
       <input type="text" name="employeeName" required><br>
       Project ID<br>
@@ -18,16 +16,25 @@ function addNewEmployee()
   }
 }
 
+if ($_POST["addNewEmployee"]) {
+
+  $employee_name = ($_POST["employeeName"]);
+  $project_id = ($_POST["projectId"]);
+
+  $new_employee = new Employees();
+  $new_employee->setName($employee_name);
+  $new_employee->setProjectId($project_id);
+  $entityManager->persist($new_employee);
+  $entityManager->flush();
+}
+
+
 
 function addNewProject()
 {
   if (isset($_GET["addProject"])) {
-    global  $max_Project_id;
-    $max_Project_id++;
     echo
       '<form action="index.php?projects" method="post">
-      Project id<br>
-      <input type="number" value="' . $max_Project_id . '" name="projectId" readonly><br>
       Project Name<br>
       <input type="text" name="projectName" required><br>
       Deadline<br>
@@ -36,3 +43,16 @@ function addNewProject()
     </form>';
   }
 }
+
+if ($_POST["addNewProject"]) {
+  
+  $project_name = ($_POST["projectName"]);
+  $project_deadline = ($_POST["projectDeadline"]);
+
+  $new_project = new Projects();
+  $new_project->setName($project_name);
+  $new_project->setDeadline($project_deadline);
+  $entityManager->persist($new_project);
+  $entityManager->flush();
+}
+
