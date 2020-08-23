@@ -20,9 +20,9 @@ function editEmployee()
     }
 }
 
-if (isset($_POST["editEmployee"]) || isset($_POST["employeeName"])) {
+if (isset($_POST["editEmployee"])) {
 
-    $editEmployee = $_POST['editEmployee'];
+    $editEmployee = $_POST['employeeId'];
     $employees = $entityManager->getRepository('Employees')->findAll();
     $employee = $entityManager->find('Employees', $editEmployee);
 
@@ -32,8 +32,7 @@ if (isset($_POST["editEmployee"]) || isset($_POST["employeeName"])) {
     $employee->setName($employee_name);
     $employee->setProjectId($project_id);
     $entityManager->flush();
-} elseif(!isset($_POST["employeeName"])){
-    echo "Name is empty";
+
 }
 
 
@@ -57,4 +56,19 @@ function editProject()
                 <input type="submit" name="editProject" value="Submit"><br>
             </form>';
     }
+}
+
+
+if (isset($_POST["editEmployee"])) {
+
+    $editEmployee = $_POST['employeeId'];
+    $employees = $entityManager->getRepository('Employees')->findAll();
+    $employee = $entityManager->find('Employees', $editEmployee);
+
+    $employee_name = ($_POST["employeeName"]);
+    $project_id = ($_POST["projectId"]);
+
+    $employee->setName($employee_name);
+    $employee->setProjectId($project_id);
+    $entityManager->flush();
 }
