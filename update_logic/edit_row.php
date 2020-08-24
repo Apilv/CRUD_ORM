@@ -2,8 +2,10 @@
 
 function editEmployee()
 {
+    global  $project_id, $min_Project_id, $max_Project_id, $entityManager;
+
     if (isset($_GET["editEmployee"])) {
-        global  $project_id, $min_Project_id, $max_Project_id;
+        
         $employee_id = $_GET["editEmployee"];
         $employee_name = $_GET["employeeName"];
         $project_id = $_GET["projectId"];
@@ -18,22 +20,22 @@ function editEmployee()
                 <input type="submit" name="editEmployee" value="Submit"><br>
             </form>';
     }
+
+    if (isset($_POST["editEmployee"])) {
+
+        $editEmployee = $_POST['employeeId'];
+        $employee = $entityManager->find('Employees', $editEmployee);
+
+        $employee_name = ($_POST["employeeName"]);
+        $project_id = ($_POST["projectId"]);
+
+        $employee->setName($employee_name);
+        $employee->setProjectId($project_id);
+        $entityManager->flush();
+    }
 }
 
-if (isset($_POST["editEmployee"])) {
 
-    $editEmployee = $_POST['employeeId'];
-    $employees = $entityManager->getRepository('Employees')->findAll();
-    $employee = $entityManager->find('Employees', $editEmployee);
-
-    $employee_name = ($_POST["employeeName"]);
-    $project_id = ($_POST["projectId"]);
-    
-    $employee->setName($employee_name);
-    $employee->setProjectId($project_id);
-    $entityManager->flush();
-
-}
 
 
 
@@ -59,16 +61,15 @@ function editProject()
 }
 
 
-if (isset($_POST["editEmployee"])) {
+if (isset($_POST["editProject"])) {
 
-    $editEmployee = $_POST['employeeId'];
-    $employees = $entityManager->getRepository('Employees')->findAll();
-    $employee = $entityManager->find('Employees', $editEmployee);
+    $project_id = $_POST['projectId'];
+    $project = $entityManager->find('Projects', $project_id);
 
-    $employee_name = ($_POST["employeeName"]);
-    $project_id = ($_POST["projectId"]);
+    $project_name = ($_POST["projectName"]);
+    $project_deadline = ($_POST["projectDeadline"]);
 
-    $employee->setName($employee_name);
-    $employee->setProjectId($project_id);
+    $project->setName($project_name);
+    $project->setDeadline($project_deadline);
     $entityManager->flush();
 }
